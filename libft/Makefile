@@ -67,7 +67,7 @@ RM = 		rm -rf
 
 all:		$(NAME)
 
-$(NAME):	echoCL ${OBJS} echoOK
+$(NAME):	${OBJS} 
 			ar rc	$(NAME) ${OBJS}
 			ranlib	$(NAME)
 
@@ -82,20 +82,3 @@ fclean:		clean
 			${RM} $(NAME)
 
 re:			fclean all
-
-.SILENT:
-
-##############______________Colors______________##############
-
-BLUE = \033[1;34m
-GREEN = \033[1;32m
-YELLOW = \033[1;33m
-CYAN = \033[1;36m
-END = \033[0m
-
-##############______________MESSAGES______________##############
-
-echoCL:
-	echo "\n$(YELLOW)===> Compiling $(BLUE)Libft$(END)\n"
-echoOK:
-	echo "$(GREEN) OK ===> Compilation Success$(END)\n"
