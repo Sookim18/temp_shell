@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:00:47 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/19 04:00:48 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/19 16:58:45 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ static void	sig_handler(int sig)
 		write(2, "\n", 1);
 		write(2, "\rexcel", 8);
 		ft_putstrs_fd(":", cwd, "$ ", 2);
+	}
+	else if (sig == SIGQUIT)
+	{
+		ft_putstr_fd("\033[2D\033[0K", 2);
 	}
 }
 

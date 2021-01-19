@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:01:25 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/19 04:01:26 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/19 16:59:29 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ void	child_sig_handler(int sig)
 {
 	if (sig == SIGINT)
 		write(2, "\n", 1);
+	else if (sig == SIGQUIT)
+	{
+		ft_putstr_fd("\033[2D\033[0K", 2);
+		ft_putstr_fd("Quit(Core Dump)\n", 2);
+		exit (0);
+	}
 }
 
 void	child_sig_handler_bash(int sig)

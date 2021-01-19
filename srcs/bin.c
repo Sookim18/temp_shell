@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:00:01 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/19 04:00:02 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/19 16:55:00 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	exec_bin(int fd, char *path, t_data *param)
 
 	args = copy_args(param);
 	signal(SIGINT, child_sig_handler);
+	signal(SIGQUIT, child_sig_handler);
 	if (!fork())
 	{
 		set_in(param->argv);
