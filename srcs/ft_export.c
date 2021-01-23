@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:00:31 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/19 04:00:32 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/23 17:39:47 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char		**export_command(t_data *param, int j)
+char		**ft_export(t_data *param, int j)
 {
 	int		i;
 	char	**cpy;
@@ -59,7 +59,7 @@ void		export_value(t_data *param, int *i)
 	}
 	else
 	{
-		param->envp = export_command(param, *i);
+		param->envp = ft_export(param, *i);
 		*i += param->argv[*i + 1] ? 2 : 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:00:19 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/19 04:00:20 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/23 17:39:32 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char		**check_command(char *str, t_data *param)
 	{
 		fd = set_fd(param);
 		copy_args1(param);
-		param->ret = check_builtins(fd, param);
+		param->ret = ft_command(fd, param);
 		if (param->ret == 127 && (param->ret = check_bin(fd, param)) == 127)
 		{
 			ft_putstrs_fd(0, str, ": command not found.\n", 2);

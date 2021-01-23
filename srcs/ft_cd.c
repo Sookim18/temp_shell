@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:00:14 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/19 04:00:15 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/23 17:39:39 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ static void	change_dir(char *path, t_data *param)
 		param->argv[0] = ft_strdup("export");
 		param->argv[1] = ft_strdup("OLDPWD=");
 		param->argv[2] = ft_strdup(oldpwd);
-		param->envp = export_command(param, 1);
+		param->envp = ft_export(param, 1);
 		free_matrix(param->argv);
 		param->argv = (char **)ft_calloc(sizeof(char *), 4);
 		param->argv[0] = ft_strdup("export");
 		param->argv[1] = ft_strdup("PWD=");
 		param->argv[2] = ft_strdup(getcwd(cwd, 4096));
-		param->envp = export_command(param, 1);
+		param->envp = ft_export(param, 1);
 	}
 	else
 		ft_putstrs_fd("bash: cd: ", param->argv[1], ": ", 2);
 }
 
-void		cd_command(t_data *param)
+void		ft_cd(t_data *param)
 {
 	char *path;
 

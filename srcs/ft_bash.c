@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bash.c                                             :+:      :+:    :+:   */
+/*   ft_bash.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 03:59:55 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/19 03:59:56 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/23 17:39:36 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static void	set_path(char *str, char **path)
 	free(new);
 }
 
-void		bash_command(t_data *param)
+void		ft_bash(t_data *param)
 {
 	char	buff[4097];
 	char	*path;

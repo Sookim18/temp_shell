@@ -6,13 +6,13 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:00:47 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/19 16:58:45 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/23 17:41:14 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	put_prompt(char **envp)
+static void	init_prompt(char **envp)
 {
 	char *home;
 	char *path;
@@ -24,7 +24,7 @@ static void	put_prompt(char **envp)
 		path = ft_strdup(cwd);
 	else
 		path = ft_strjoin("~", cwd + ft_strlen(home));
-	write(2, "excel", 6);
+	write(2, "sookimshell", 12);
 	ft_putstrs_fd(":", path, "$ ", 2);
 	free(path);
 }
@@ -38,7 +38,7 @@ static void	sig_handler(int sig)
 		getcwd(cwd, 4096);
 		ft_putstr_fd("\033[2D\033[0K", 2);
 		write(2, "\n", 1);
-		write(2, "\rexcel", 8);
+		write(2, "\rsookimshell", 14);
 		ft_putstrs_fd(":", cwd, "$ ", 2);
 	}
 	else if (sig == SIGQUIT)
@@ -47,7 +47,7 @@ static void	sig_handler(int sig)
 	}
 }
 
-static void	init_param(t_data **param, char **argv, char **envp, int *ret_len)
+static void	init(t_data **param, char **argv, char **envp, int *ret_len)
 {
 	(*param) = (t_data *)malloc(sizeof(t_data));
 	(*param)->envp = copy_env(envp, 0);
@@ -67,12 +67,12 @@ int			main(int argc, char **argv, char **envp)
 
 	if (argc != 1)
 		return (1);
-	init_param(&param, argv, envp, ret_len);
+	init(&param, argv, envp, ret_len);
 	signal(SIGQUIT, sig_handler);
 	while (1)
 	{
 		if (ret_len[0])
-			put_prompt(param->envp);
+			init_prompt(param->envp);
 		signal(SIGINT, sig_handler);
 		while ((ret_len[0] = read(1, &c, 1)) && c != '\n')
 			ft_addchr(&(param->str), c);

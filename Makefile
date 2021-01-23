@@ -6,15 +6,15 @@ SRCS =	srcs/main.c\
 		srcs/command.c\
 		srcs/args.c\
 		srcs/bin.c\
-		srcs/builtins.c\
-		srcs/bash.c\
-		srcs/cd.c\
-		srcs/export.c\
-		srcs/unset.c\
+		srcs/ft_command.c\
+		srcs/ft_bash.c\
+		srcs/ft_cd.c\
+		srcs/ft_export.c\
+		srcs/ft_unset.c\
 		srcs/utils.c\
 		srcs/lens.c\
 		srcs/remove.c\
-		srcs/exit.c\
+		srcs/ft_exit.c\
 
 OBJS = $(SRCS:.c=.o)
 
@@ -39,7 +39,6 @@ complib:
 
 %.o:		%.c
 	$(CC) -c $(CFLAGS) -o $@ $<
-	printf "$(GREEN)██"
 
 clean:
 	$(MAKE) -C $(LIBFTDIR) clean

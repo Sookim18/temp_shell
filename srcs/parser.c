@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:01:03 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/19 04:01:04 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/23 17:40:10 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	change_env(int i, int braces, char **str, t_data *param)
 	return (len);
 }
 
-static int	check_quotes(char **str, int *i)
+static int	q(char **str, int *i)
 {
 	(*i)++;
 	while ((*str)[*i] && ((*str)[*i] != '\''))
@@ -63,7 +63,7 @@ static int	check_env(char **str, t_data *param)
 	braces = 0;
 	while ((*str) && (*str)[i])
 	{
-		if ((*str)[i] == '\'' && check_quotes(str, &i))
+		if (((*str)[i] == '\'' && q(str, &i)) || ((*str)[i] == '"' && dq(str, &i)))
 			return (1);
 		if ((*str)[i] && (*str)[i] == '\\')
 		{
@@ -88,6 +88,17 @@ static int	check_semicolon(t_data *param)
 		if (param->str)
 		{
 			ft_putstr_fd("-bash; syntax error near unexpected token `;'\n", 2);
+			param->ret = 2;
+		}
+		free(param->str);
+		param->str = 0;
+		return (1);
+	}
+	else if (!param->str || !ft_memcmp(param->str, ";;", 3))
+	{
+		if (param->str)
+		{
+			ft_putstr_fd("-bash; syntax error near unexpected token `;;'\n", 2);
 			param->ret = 2;
 		}
 		free(param->str);
