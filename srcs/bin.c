@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:00:01 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/23 17:39:24 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/24 17:41:03 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ static void	exec_bin(int fd, char *path, t_data *param)
 			dup2(fd, 1);
 		if ((execve(path, args, param->envp)) && errno == EACCES)
 		{
-			param->ret = 126;
+			g_ret = 126;
 			ft_putstrs_fd("bash: ", param->argv[0], ": ", 2);
 			ft_putstrs_fd(strerror(errno), "\n", 0, 2);
 		}
-		exit(param->ret);
+		exit(g_ret);
 	}
-	wait(&param->ret);
-	param->ret /= 256;
+	wait(&g_ret);
+	g_ret /= 256;
 	free(path);
 	free_matrix(args);
 }
@@ -70,7 +70,7 @@ static char	**split_path(t_data *param, char *str)
 	else
 	{
 		ft_putstrs_fd("bash: ", str, ": No such file or directory\n", 2);
-		param->ret = 127;
+		g_ret = 127;
 		return (NULL);
 	}
 	return (paths);
@@ -110,7 +110,7 @@ int			check_bin(int fd, t_data *param)
 	char			*pre_path;
 	char			*path;
 
-	param->ret = 127;
+	g_ret = 127;
 	pre_path = search_bin(param->argv[0], &dir, &d, param);
 	if (pre_path)
 	{
@@ -119,5 +119,5 @@ int			check_bin(int fd, t_data *param)
 		closedir(dir);
 	}
 	free(pre_path);
-	return (param->ret);
+	return (g_ret);
 }

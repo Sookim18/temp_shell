@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:00:14 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/23 17:39:39 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/24 17:39:37 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void		ft_cd(t_data *param)
 		if (errno > 0)
 		{
 			ft_putstrs_fd(strerror(errno), "\n", 0, 2);
-			param->ret = 1;
+			g_ret = 1;
 		}
 	}
 	else
 	{
 		ft_putstr_fd("bash: cd: too many arguments\n", 2);
-		param->ret = 1;
+		g_ret = 1;
 	}
 	errno = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:01:03 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/23 17:40:10 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/24 17:37:45 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	change_env(int i, int braces, char **str, t_data *param)
 	ft_strlen_env(*str + i + 1) + 1 + braces;
 	bef = ft_strldup(*str, i);
 	aux = ft_strldup(*str + i + 1 + braces, len - 1 - braces * 2);
-	env = (!ft_memcmp(aux, "?", 2)) ? ft_itoa(param->ret) : 0;
+	env = (!ft_memcmp(aux, "?", 2)) ? ft_itoa(g_ret) : 0;
 	aft = ft_strdup(*str + i + len);
 	env = (!env) ? ft_strdup(get_env(param->envp, aux)) : env;
 	free(aux);
@@ -88,7 +88,7 @@ static int	check_semicolon(t_data *param)
 		if (param->str)
 		{
 			ft_putstr_fd("-bash; syntax error near unexpected token `;'\n", 2);
-			param->ret = 2;
+			g_ret = 2;
 		}
 		free(param->str);
 		param->str = 0;
@@ -99,7 +99,7 @@ static int	check_semicolon(t_data *param)
 		if (param->str)
 		{
 			ft_putstr_fd("-bash; syntax error near unexpected token `;;'\n", 2);
-			param->ret = 2;
+			g_ret = 2;
 		}
 		free(param->str);
 		param->str = 0;

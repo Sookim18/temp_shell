@@ -6,19 +6,19 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 03:59:55 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/23 17:39:36 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/24 17:43:09 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	check_errno(t_data *param, char *str)
+static int	check_errno(char *str)
 {
 	if (errno == ENOENT || errno == EACCES)
 	{
 		ft_putstrs_fd("bash: ", str, ": ", 2);
 		ft_putstrs_fd(strerror(errno), "\n", 0, 2);
-		param->ret = (errno == ENOENT) ? 127 : 126;
+		g_ret = (errno == ENOENT) ? 127 : 126;
 		return (1);
 	}
 	return (0);
@@ -30,7 +30,7 @@ static void	check_type(t_data *param, char *str, char *path)
 	int			fd;
 	char		**cmds;
 
-	if (check_errno(param, str))
+	if (check_errno(str))
 		return ;
 	else if (!(dir = opendir(path)))
 	{
@@ -47,7 +47,7 @@ static void	check_type(t_data *param, char *str, char *path)
 	else
 	{
 		ft_putstrs_fd("-bash: ", str, ": Is a directory\n", 2);
-		param->ret = 126;
+		g_ret = 126;
 		closedir(dir);
 	}
 }
@@ -113,11 +113,11 @@ void		ft_bash(t_data *param)
 		signal(SIGINT, child_sig_handler_bash);
 		if (execve(path, param->argv, param->envp))
 			check_type(param, start, path);
-		exit(param->ret);
+		exit(g_ret);
 	}
 	else
-		wait(&param->ret);
-	param->ret /= 256;
+		wait(&g_ret);
+	g_ret /= 256;
 	free(path);
 	param->argv[0] = start;
 }

@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:01:10 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/23 17:40:13 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/24 17:37:17 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	pipe_son(int *flag, int *fds, t_data *param, int pos)
 		free_matrix(param->argv);
 		param->argc = argc;
 		param->argv = argv;
-		exit(param->ret);
+		exit(g_ret);
 	}
 }
 
@@ -113,8 +113,8 @@ void		command_or_pipe(t_data *param, int j)
 		pipe(fds + 2);
 		sons = check_pipe(fds, param);
 		while (sons-- > 0)
-			wait(&param->ret);
-		param->ret /= 256;
+			wait(&g_ret);
+		g_ret /= 256;
 		i = -1;
 		while (++i < 4)
 			close(fds[i]);

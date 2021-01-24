@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:15:52 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/23 17:39:42 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/24 17:39:29 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	**multiple_env(t_data *param, int fd)
 {
 	int i;
 
-	param->ret = 0;
+	g_ret = 0;
 	if (!ft_memcmp(param->argv[0], "export", 7) && param->argc == 1 &&
 		!ft_strlen(param->argv[1]))
 	{
@@ -27,7 +27,7 @@ static char	**multiple_env(t_data *param, int fd)
 	while (param->argv[i])
 	{
 		if (check_export_error(param->argv, &i))
-			(param->ret)++;
+			(g_ret)++;
 		else
 		{
 			if (!ft_memcmp(param->argv[0], "export", 7))
@@ -36,7 +36,7 @@ static char	**multiple_env(t_data *param, int fd)
 				param->envp = ft_unset(param, i++);
 		}
 	}
-	param->ret = param->ret ? 1 : 0;
+	g_ret = g_ret ? 1 : 0;
 	return (param->envp);
 }
 
@@ -48,7 +48,7 @@ static void	ft_env(t_data *param, int fd)
 	if (param->argc != 1)
 	{
 		ft_putstrs_fd("env: ‘", param->argv[1], "’: Permission denied\n", 2);
-		param->ret = 126;
+		g_ret = 126;
 		return ;
 	}
 	while (param->envp[i])
@@ -95,9 +95,9 @@ static int	ft_command2(int fd, t_data *param)
 
 int			ft_command(int fd, t_data *param)
 {
-	param->ret = 0;
+	g_ret = 0;
 	if (!ft_command2(fd, param))
-		return (param->ret);
+		return (g_ret);
 	else if (!ft_memcmp(param->argv[0], "env", 4))
 		ft_env(param, fd);
 	else if (!ft_memcmp(param->argv[0], "./", 2) ||
@@ -112,5 +112,5 @@ int			ft_command(int fd, t_data *param)
 		ft_exit(param);
 	else
 		return (127);
-	return (param->ret);
+	return (g_ret);
 }

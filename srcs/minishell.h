@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:00:57 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/23 17:40:02 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/24 17:37:53 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ typedef struct		s_data{
 	char	**argv;
 	char	**envp;
 	char	**export;
-	int		ret;
 	char	*str;
 	char	**cmds;
 	int		child;
 }					t_data;
+int					g_ret;
 
 void				free_matrix(char **matrix);
 void				set_args(char **argv, char *str, int argc);

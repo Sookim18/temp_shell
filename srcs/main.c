@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:00:47 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/23 17:44:57 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/24 17:45:11 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ static void	sig_handler(int sig)
 		write(2, "\n", 1);
 		write(2, "\rminishell", 12);
 		ft_putstrs_fd(":", cwd, "$ ", 2);
+		g_ret = 130;
 	}
 	else if (sig == SIGQUIT)
 	{
 		ft_putstr_fd("\033[2D\033[0K", 2);
+		g_ret = 0;
 	}
 }
 
@@ -53,7 +55,7 @@ static void	init(t_data **param, char **argv, char **envp, int *ret_len)
 	(*param)->envp = copy_env(envp, 0);
 	(*param)->export = (char **)ft_calloc(sizeof(char *), 1);
 	(*param)->argv = argv;
-	(*param)->ret = 0;
+	g_ret = 0;
 	(*param)->str = 0;
 	(*param)->child = 0;
 	ret_len[0] = 1;
