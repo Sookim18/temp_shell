@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:15:52 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/24 17:39:29 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/24 17:50:16 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	ft_env(t_data *param, int fd)
 	i = 0;
 	if (param->argc != 1)
 	{
-		ft_putstrs_fd("env: ‘", param->argv[1], "’: Permission denied\n", 2);
+		ft_putstrs_fd("env: ", param->argv[1], ": Permission denied\n", 2);
 		g_ret = 126;
 		return ;
 	}

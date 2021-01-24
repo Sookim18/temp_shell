@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:01:20 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/23 17:39:50 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/24 17:49:34 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,4 @@ char		**ft_unset(t_data *param, int j)
 		cpy = param->envp;
 	free(env);
 	return (cpy);
-}
-
-int	dq(char **str, int *i)
-{
-	(*i)++;
-	while ((*str)[*i] && ((*str)[*i] != '"'))
-		(*i)++;
-	if (!(*str)[*i])
-	{
-		ft_putstr_fd("Non finished double quotes\n", 2);
-		return (1);
-	}
-	return (0);
 }

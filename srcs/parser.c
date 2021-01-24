@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:01:03 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/24 17:37:45 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/24 17:50:40 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	check_env(char **str, t_data *param)
 	braces = 0;
 	while ((*str) && (*str)[i])
 	{
-		if (((*str)[i] == '\'' && q(str, &i)) || ((*str)[i] == '"' && dq(str, &i)))
+		if ((*str)[i] == '\'' && q(str, &i))
 			return (1);
 		if ((*str)[i] && (*str)[i] == '\\')
 		{

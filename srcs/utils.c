@@ -6,7 +6,7 @@
 /*   By: sookim <sookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 04:01:25 by sookim            #+#    #+#             */
-/*   Updated: 2021/01/24 17:47:06 by sookim           ###   ########.fr       */
+/*   Updated: 2021/01/24 17:50:56 by sookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	child_sig_handler(int sig)
 	{
 		ft_putstr_fd("\033[2D\033[0K", 2);
 		ft_putstr_fd("Quit(Core Dump)\n", 2);
-		exit (0);
+		exit(0);
 	}
 }
 
